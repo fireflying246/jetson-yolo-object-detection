@@ -8,9 +8,9 @@
 |---|---:|---:|---:|
 | train | 96 | 96 | 192 |
 | val | 24 | 24 | 48 |
-| test | 0 | 0 | 0 |
+| test | 10 | 10 | 20 |
 
-`test` 当前故意留空。正式测试集应重新拍摄，使用不同拍摄时段、背景、光照、距离和角度；训练和调参期间不要使用 test 结果。
+`test` 已由独立拍摄会话补充，共20张（mouse 10张、cup 10张）。该集合只用于最终评估，训练和调参期间不要使用 test 结果。
 
 ## 目录
 
@@ -85,7 +85,7 @@ python src\train.py
 python src\evaluate.py --weights results\yolo11n_baseline\weights\best.pt --split val
 ```
 
-重新拍摄并标注 test 集、再次通过审计后，才运行：
+完成训练与调参并通过数据审计后，才运行：
 
 ```powershell
 python src\evaluate.py --weights results\yolo11n_baseline\weights\best.pt --split test

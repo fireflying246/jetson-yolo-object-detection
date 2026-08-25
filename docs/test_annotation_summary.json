@@ -1,0 +1,25 @@
+{
+  "date": "2026-08-25",
+  "format": "YOLO bounding boxes",
+  "class_mapping": {
+    "0": "mouse",
+    "1": "cup"
+  },
+  "source_directories": {
+    "mouse": "raw_images/train_mouse",
+    "cup": "raw_images/train_cup"
+  },
+  "output": "dataset/object_detection/{images,labels}/test",
+  "counts": {
+    "mouse": 10,
+    "cup": 10,
+    "total": 20
+  },
+  "rules": [
+    "mouse box excludes cable",
+    "cup box includes rigid cup body and lid",
+    "hands and unrelated objects excluded"
+  ],
+  "review": "all images reviewed once; blur, crop-edge proximity, orientation and unusual views reviewed manually",
+  "additional_source_image": "D:/数据/xwechat_files/wxid_syrrz9uuhi8l22_fad7/temp/RWTemp/2026-08/7929b2dc9cc85e07e053820b0b6b1688/7b76a133048cf126e1e1639587e8efc0.jpg"
+}

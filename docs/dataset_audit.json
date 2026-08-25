@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-25T01:45:56.580682+00:00",
+  "generated_at_utc": "2026-08-25T09:00:22.789445+00:00",
   "dataset_root": "D:\\object detection\\dataset\\object_detection",
   "status": "pass",
   "thresholds": {
@@ -18,9 +18,9 @@
       "annotations": 48
     },
     "test": {
-      "images": 0,
-      "labels": 0,
-      "annotations": 0
+      "images": 20,
+      "labels": 20,
+      "annotations": 20
     }
   },
   "pairing": {

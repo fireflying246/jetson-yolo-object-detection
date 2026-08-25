@@ -1,13 +1,14 @@
 {
   "seed": 20260825,
   "strategy": "pHash<=4 connected groups plus adjacent-frame pHash<=8 groups; whole-group assignment",
-  "test_policy": "empty; collect an independent recording session",
+  "test_policy": "independent capture session; excluded from training and tuning",
   "classes": {
     "mouse": {
       "class_id": 0,
       "counts": {
         "train": 96,
-        "val": 24
+        "val": 24,
+        "test": 10
       },
       "group_count": 89,
       "validation_groups": [
@@ -31,13 +32,15 @@
         "mouse_g073",
         "mouse_g080",
         "mouse_g082"
-      ]
+      ],
+      "test_group": "mouse_test_session_20260825"
     },
     "cup": {
       "class_id": 1,
       "counts": {
         "train": 96,
-        "val": 24
+        "val": 24,
+        "test": 10
       },
       "group_count": 75,
       "validation_groups": [
@@ -63,7 +66,8 @@
         "cup_g067",
         "cup_g069",
         "cup_g074"
-      ]
+      ],
+      "test_group": "cup_test_session_20260825"
     }
   }
 }
