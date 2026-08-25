@@ -1,0 +1,69 @@
+{
+  "seed": 20260825,
+  "strategy": "pHash<=4 connected groups plus adjacent-frame pHash<=8 groups; whole-group assignment",
+  "test_policy": "empty; collect an independent recording session",
+  "classes": {
+    "mouse": {
+      "class_id": 0,
+      "counts": {
+        "train": 96,
+        "val": 24
+      },
+      "group_count": 89,
+      "validation_groups": [
+        "mouse_g004",
+        "mouse_g005",
+        "mouse_g014",
+        "mouse_g016",
+        "mouse_g019",
+        "mouse_g026",
+        "mouse_g030",
+        "mouse_g031",
+        "mouse_g037",
+        "mouse_g048",
+        "mouse_g051",
+        "mouse_g052",
+        "mouse_g053",
+        "mouse_g057",
+        "mouse_g061",
+        "mouse_g062",
+        "mouse_g068",
+        "mouse_g073",
+        "mouse_g080",
+        "mouse_g082"
+      ]
+    },
+    "cup": {
+      "class_id": 1,
+      "counts": {
+        "train": 96,
+        "val": 24
+      },
+      "group_count": 75,
+      "validation_groups": [
+        "cup_g000",
+        "cup_g001",
+        "cup_g003",
+        "cup_g004",
+        "cup_g008",
+        "cup_g012",
+        "cup_g020",
+        "cup_g021",
+        "cup_g022",
+        "cup_g023",
+        "cup_g027",
+        "cup_g028",
+        "cup_g030",
+        "cup_g032",
+        "cup_g040",
+        "cup_g047",
+        "cup_g051",
+        "cup_g052",
+        "cup_g053",
+        "cup_g067",
+        "cup_g069",
+        "cup_g074"
+      ]
+    }
+  }
+}
