@@ -1,0 +1,35 @@
+{
+  "generated_at_utc": "2026-08-25T01:45:56.580682+00:00",
+  "dataset_root": "D:\\object detection\\dataset\\object_detection",
+  "status": "pass",
+  "thresholds": {
+    "phash_cross_split_hamming_max": 4,
+    "adjacent_cross_split_hamming_max": 8
+  },
+  "counts": {
+    "train": {
+      "images": 192,
+      "labels": 192,
+      "annotations": 192
+    },
+    "val": {
+      "images": 48,
+      "labels": 48,
+      "annotations": 48
+    },
+    "test": {
+      "images": 0,
+      "labels": 0,
+      "annotations": 0
+    }
+  },
+  "pairing": {
+    "missing_labels": [],
+    "orphan_labels": [],
+    "duplicate_stems": []
+  },
+  "label_errors": [],
+  "cross_split_exact_duplicates": [],
+  "cross_split_near_duplicates": [],
+  "cross_split_adjacent_near_duplicates": []
+}

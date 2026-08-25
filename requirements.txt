@@ -1,0 +1,4 @@
+ultralytics==8.4.115
+numpy==2.3.5
+Pillow==12.3.0
+PyYAML>=6.0,<7.0

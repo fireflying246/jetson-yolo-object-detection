@@ -1,0 +1,12 @@
+model: yolo11n.pt
+data: dataset/object_detection/data.yaml
+epochs: 100
+imgsz: 640
+batch: 16
+patience: 20
+seed: 20260825
+deterministic: true
+workers: 4
+project: results
+name: yolo11n_baseline
+exist_ok: false

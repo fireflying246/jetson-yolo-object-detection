@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.idea/
+.vscode/
+
+# 原始数据在本机只读保留；Git追踪可复现的dataset目录，避免重复提交图片。
+raw_images/
+videos/*
+!videos/.gitkeep
+
+# 大体积模型与训练中间产物。
+models/*.pt
+models/*.onnx
+results/**/weights/*.pt
+results/**/weights/*.onnx
+runs/
+
+# 系统文件。
+Thumbs.db
+.DS_Store
