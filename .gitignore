@@ -17,8 +17,10 @@ models/*.onnx
 results/**/weights/*.pt
 results/**/weights/*.onnx
 runs/
+*.cache
+ai_logs/
+/yolo*.pt
 
 # 系统文件。
 Thumbs.db
 .DS_Store
-ai_logs/
