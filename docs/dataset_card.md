@@ -3,19 +3,19 @@
 ## 任务与类别
 
 - 任务：YOLO目标检测。
-- 类别映射：`0=mouse`、`1=cup`。
+- 类别映射：`0=mouse`、`1=bottle`。旧文件名中的 `cup` 仍表示类别 1。
 - 边界框：只包含目标本体，不包含手、线缆或其他背景物体。
 
 ## 来源与限制
 
-train/val 中 mouse 与 cup 各120张，分别来自连续拍摄序列；邻近帧相关性较强，不能逐张随机划分。test 来自独立拍摄会话，共20张。
+GitHub 基线数据的 train/val 中 mouse 与 bottle 各120张，分别来自连续拍摄序列；邻近帧相关性较强，不能逐张随机划分。test 来自独立拍摄会话，共20张。
 
 ## 划分
 
 - seed：`20260825`
 - train：每类96张
 - val：每类24张
-- test：mouse 10张、cup 10张（独立拍摄会话）
+- test：mouse 10张、bottle 10张（独立拍摄会话）
 - 分组规则：pHash距离不大于4的图片为同组；相邻且pHash距离不大于8的连续帧也为同组；组不可跨集合。
 
 精确分配、哈希和来源见 `dataset/object_detection/splits/manifest.csv`，自动检查结果见 `docs/dataset_audit.json`。

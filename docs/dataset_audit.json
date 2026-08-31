@@ -1,6 +1,6 @@
 {
   "generated_at_utc": "2026-08-25T09:00:22.789445+00:00",
-  "dataset_root": "D:\\object detection\\dataset\\object_detection",
+  "dataset_root": "dataset/object_detection",
   "status": "pass",
   "thresholds": {
     "phash_cross_split_hamming_max": 4,

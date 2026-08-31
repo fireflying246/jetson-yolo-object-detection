@@ -1,7 +1,7 @@
 task: detect
 mode: train
 model: yolo11n.pt
-data: D:\object detection\dataset\object_detection\data.yaml
+data: dataset/object_detection/data.yaml
 epochs: 100
 time: null
 patience: 20
@@ -12,7 +12,7 @@ save_period: -1
 cache: false
 device: ''
 workers: 4
-project: D:\object detection\results
+project: results
 name: yolo11n_baseline
 exist_ok: false
 pretrained: true
@@ -113,4 +113,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: tracktrack.yaml
-save_dir: D:\object detection\results\yolo11n_baseline
+save_dir: results/yolo11n_baseline

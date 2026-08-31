@@ -35,7 +35,7 @@
       ],
       "test_group": "mouse_test_session_20260825"
     },
-    "cup": {
+    "bottle": {
       "class_id": 1,
       "counts": {
         "train": 96,

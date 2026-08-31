@@ -13,10 +13,11 @@ from PIL import Image, ImageOps
 
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
-CLASS_NAMES = {0: "mouse", 1: "cup"}
+CLASS_NAMES = {0: "mouse", 1: "bottle"}
 PHASH_NEAR_THRESHOLD = 4
 ADJACENT_NEAR_THRESHOLD = 8
-STEM_PATTERN = re.compile(r"^(mouse|cup)_(\d+)$")
+# cup 是旧文件名前缀；类别 ID 1 的当前名称为 bottle。
+STEM_PATTERN = re.compile(r"^(mouse|cup|bottle)_(\d+)$")
 
 
 def sha256_file(path: Path) -> str:

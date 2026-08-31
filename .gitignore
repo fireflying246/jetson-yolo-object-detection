@@ -20,6 +20,7 @@ runs/
 *.cache
 ai_logs/
 /yolo*.pt
+raw_images.zip
 
 # 系统文件。
 Thumbs.db

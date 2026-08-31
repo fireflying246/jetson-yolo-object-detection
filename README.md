@@ -1,102 +1,80 @@
-# Mouse & Cup YOLO Object Detection
+# Mouse & Bottle YOLO Object Detection
 
-本项目用于训练一个两类别目标检测模型：`mouse=0`、`cup=1`。当前已有数据来自两段连续拍摄序列，因此按近重复组而不是逐张随机划分，以降低相邻帧泄漏。
+本项目用于训练和部署两类别 YOLO 目标检测模型：`mouse=0`、`bottle=1`。旧数据文件名中可能仍含 `cup`，但类别 ID 1 的当前统一名称以 `data.yaml` 为准，均解释为 `bottle`。
 
-## 数据状态
+## GitHub 内容范围
 
-| split | mouse | cup | 总数 |
+仓库保留可供检查和演示的基线数据集，以及训练、评价、审计和检测代码。完整扩充数据集、原始图片、视频、训练缓存和模型权重保留在本地，不直接提交到 Git。
+
+| 内容 | GitHub | 说明 |
+|---|---|---|
+| 核心代码、配置、依赖和文档 | 是 | 用于助教检查和流程复现 |
+| 基线数据集 | 是 | train 192、val 48、test 20 |
+| 完整扩充数据集 | 否 | 本地图片约 204 MB |
+| `best.pt` 模型权重 | 否 | 使用 Git LFS 或 Release 单独发布 |
+| `runs/`、视频、缓存和原始压缩包 | 否 | 均为生成物或原始素材 |
+
+基线数据集的类别数量如下：
+
+| split | mouse | bottle | 总数 |
 |---|---:|---:|---:|
 | train | 96 | 96 | 192 |
 | val | 24 | 24 | 48 |
 | test | 10 | 10 | 20 |
 
-`test` 已由独立拍摄会话补充，共20张（mouse 10张、cup 10张）。该集合只用于最终评估，训练和调参期间不要使用 test 结果。
+`test` 来自独立拍摄会话，只用于最终评价，不应根据其结果调整训练参数。
 
-## 目录
+## 主要文件
 
 ```text
-dataset/object_detection/
-├─ images/{train,val,test}
-├─ labels/{train,val,test}
-├─ splits/{train.txt,val.txt,test.txt,manifest.csv,split_summary.json}
-└─ data.yaml
-src/
-├─ prepare_dataset.py
-├─ audit_dataset.py
-├─ train.py
-└─ evaluate.py
-configs/train_baseline.yaml
-docs/dataset_card.md
-docs/experiment_log.md
-docs/dataset_audit.json
+detection.py                         # 图片、视频、摄像头和网络流检测
+view_jetson_stream.py                # 接收并显示 Jetson 发送的 JPEG 视频流
+src/train.py                         # 训练入口
+src/evaluate.py                      # val/test 评价入口
+src/prepare_dataset.py               # 基线数据准备
+src/audit_dataset.py                 # 标签、重复和数据泄漏审计
+configs/train_baseline.yaml          # 基线训练配置
+configs/train_finetune_v2.yaml       # 最终微调配置
+dataset/object_detection/data.yaml   # YOLO 数据集定义
+docs/final_training_summary.json     # 最终训练指标摘要
 ```
-
-原始 `raw_images` 只读保留。GitHub 默认提交整理后的 `dataset`、标签、划分清单、脚本和实验记录，不重复提交 `raw_images`。
-
-## 划分方法
-
-- 固定种子：`20260825`。
-- 对每个类别计算64位感知哈希（pHash）。
-- pHash 汉明距离不大于4的图片合并为同一近重复组。
-- 序号相邻且 pHash 汉明距离不大于8的连续帧也合并为同组。
-- 每个分组整体进入 train 或 val；验证集在序列前、中、后三段尽量均衡抽取。
-- `splits/manifest.csv` 保存每张图片的来源、类别、分组、SHA-256 和 pHash。
 
 ## 环境
 
-- 推荐 Python 3.12。
-- 数据准备脚本已按 `numpy==2.3.5`、`Pillow==12.3.0` 编写。
-- 训练基线固定 `ultralytics==8.4.115`。
-- PyTorch/CUDA 应根据训练机器显卡和官方安装说明单独安装；安装后将实际环境保存到 `docs/environment-lock.txt`。
+最后一次训练使用 Python 3.10.20、Ultralytics 8.4.127、NumPy 2.2.6、Pillow 12.3.0 和 PyYAML 6.0.3。PyTorch/CUDA 应根据运行平台单独安装；Jetson 应使用与 JetPack 匹配的 NVIDIA PyTorch 包，不要直接照搬 Windows CUDA wheel。
 
-```powershell
-cd 'D:\object detection'
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pip freeze | Set-Content -Encoding utf8 docs\environment-lock.txt
+```bash
+python3.10 -m pip install -r requirements.txt
 ```
 
-## 数据复核
+## 运行检测
 
-重新生成数据集前，目标 `dataset/object_detection/images` 和 `labels` 目录必须为空，脚本不会自动删除已有数据。
+先将训练好的权重放到 `models/best.pt`，然后运行：
 
-```powershell
-python src\prepare_dataset.py
-python src\audit_dataset.py
+```bash
+python3.10 detection.py --weights models/best.pt --source 0 --device 0
 ```
 
-审计检查：图片/同名标签配对、YOLO坐标合法性、跨集合 SHA-256 完全重复、跨集合 pHash 近重复以及相邻连续帧泄漏。结果写入 `docs/dataset_audit.json`。
+`--source` 可填写摄像头编号、图片、视频或网络流地址；添加 `--save` 可保存带检测框的结果，按 `Q` 退出显示窗口。
 
-## 基线训练
+接收 Jetson 已编码的视频流时可运行：
 
-默认参数位于 `configs/train_baseline.yaml`：YOLO11n、100 epochs、640像素、batch 16、patience 20、固定种子并启用确定性训练。
-
-```powershell
-python src\train.py
+```bash
+python3.10 view_jetson_stream.py --host 127.0.0.1 --port 5000
 ```
 
-显存不足时只调整 `batch`，并在实验记录中注明。不要根据 test 指标调整训练参数。
+## 训练与评价
 
-## 评价
-
-```powershell
-python src\evaluate.py --weights results\yolo11n_baseline\weights\best.pt --split val
+```bash
+python3.10 src/train.py --config configs/train_finetune_v2.yaml
+python3.10 src/evaluate.py --weights models/best.pt --split val
+python3.10 src/evaluate.py --weights models/best.pt --split test
 ```
 
-完成训练与调参并通过数据审计后，才运行：
+数据复核命令：
 
-```powershell
-python src\evaluate.py --weights results\yolo11n_baseline\weights\best.pt --split test
+```bash
+python3.10 src/audit_dataset.py
 ```
 
-## GitHub 初始化
-
-```powershell
-git init
-git add .
-git commit -m "Prepare grouped YOLO dataset and baseline configuration"
-```
-
-首次训练前提交数据划分和配置；训练参数有变化时单独提交。模型权重通常不直接进入 Git，可使用 GitHub Releases 或 Git LFS 保存选定权重。
+审计包含图片/标签配对、YOLO 坐标合法性、跨集合完全重复、近重复和相邻连续帧泄漏检查。模型权重不直接进入 Git；确需从 GitHub 下载时，应通过 Git LFS 或 GitHub Release 发布并记录 SHA-256。

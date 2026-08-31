@@ -23,8 +23,9 @@ CLASS_CONFIG = {
         "images": RAW_ROOT / "mouse_yolo_annotated" / "images",
         "labels": RAW_ROOT / "mouse_yolo_annotated" / "labels",
     },
-    "cup": {
+    "bottle": {
         "class_id": 1,
+        # 原始文件夹沿用采集时的旧名称，输出类别统一为 bottle。
         "images": RAW_ROOT / "cup_yolo_annotated" / "images",
         "labels": RAW_ROOT / "cup_yolo_annotated" / "labels",
     },
