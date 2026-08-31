@@ -1,0 +1,51 @@
+{
+  "status": "completed",
+  "created_at": "2026-08-31",
+  "execution_platform": "NVIDIA Jetson",
+  "execution_path": "ROS2 yolo_detector node",
+  "input": {
+    "path": "local_raw_video/2e9967a94ca7f6e8bdf85906f74f878f.mp4",
+    "sha256": "3554f87a3922e52f007398f9b66e2cc754ef6edf76ed49ec56fe61156060da23",
+    "preserved": true
+  },
+  "output": {
+    "path": "videos/final_detection_mouse_bottle_20260831.mp4",
+    "sha256": "b90e195f0feb53a172932ac92e6d0a82d26615d193574890d461209651695327",
+    "bytes": 8432579,
+    "frames": 495,
+    "fps": 24.0,
+    "duration_seconds": 20.625,
+    "width": 540,
+    "height": 960
+  },
+  "model": {
+    "path": "models/best.pt",
+    "sha256": "c9a4194643a41d742b3feefe486f4b23179468650751f440c9696a95de5c9f0b",
+    "classes": {
+      "0": "mouse",
+      "1": "bottle"
+    }
+  },
+  "detector": {
+    "node_sha256": "f4f18df48db2b472e1f8fd5e1eea7e4eef0c1ca443819bf46b66d5cae07d5c48",
+    "inference_confidence": 0.2,
+    "iou_threshold": 0.45,
+    "mouse_display_threshold": 0.5,
+    "bottle_display_threshold": 0.5
+  },
+  "ros2_validation": {
+    "node": "/yolo_detector",
+    "topic": "/detection_result",
+    "type": "std_msgs/msg/String",
+    "publisher_count": 1,
+    "observed_fps_range": [20.24, 21.88],
+    "sample_messages": [
+      "bottle:0.58 | FPS:20.24",
+      "mouse:0.79 | FPS:21.01",
+      "mouse:0.77 | FPS:21.35",
+      "bottle:0.66 | FPS:21.65",
+      "bottle:0.90, mouse:0.66 | FPS:21.88"
+    ]
+  },
+  "review_note": "Contact-sheet sampling confirms that mouse and bottle boxes, confidence values, and runtime FPS are rendered. A possible early bottle false-positive is retained as the model's actual output."
+}

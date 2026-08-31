@@ -10,10 +10,12 @@ venv/
 raw_images/
 videos/*
 !videos/.gitkeep
+!videos/final_detection_mouse_bottle_20260831.mp4
 
 # 大体积模型与训练中间产物。
 models/*.pt
 models/*.onnx
+!models/best.pt
 results/**/weights/*.pt
 results/**/weights/*.onnx
 runs/

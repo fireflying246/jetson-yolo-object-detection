@@ -1,0 +1,28 @@
+{
+  "archive": "dataset_object_detection_final_20260831.zip",
+  "archive_root": "object_detection/",
+  "source_file_count": 2532,
+  "bytes": 212278797,
+  "sha256": "b86b017277ef678d30983762cb53c999f8f16bfe272dc284e03248b0902c1130",
+  "splits": {
+    "train": {
+      "images": 1082,
+      "labels": 1082
+    },
+    "val": {
+      "images": 131,
+      "labels": 131
+    },
+    "test": {
+      "images": 37,
+      "labels": 37
+    }
+  },
+  "includes": [
+    "images/",
+    "labels/",
+    "splits/",
+    "excluded/",
+    "data.yaml"
+  ]
+}

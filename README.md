@@ -1,47 +1,38 @@
 # Mouse & Bottle YOLO Object Detection
 
-本项目用于训练和部署两类别 YOLO 目标检测模型：`mouse=0`、`bottle=1`。旧数据文件名中可能仍含 `cup`，但类别 ID 1 的当前统一名称以 `data.yaml` 为准，均解释为 `bottle`。
+本项目完成 `mouse=0`、`bottle=1` 两类别目标检测模型的训练、测试和 NVIDIA Jetson ROS2 部署。旧数据文件名中可能含 `cup`，但类别 ID 1 已统一解释为 `bottle`。
 
-## GitHub 内容范围
+## 最小交付内容
 
-仓库保留可供检查和演示的基线数据集，以及训练、评价、审计和检测代码。完整扩充数据集、原始图片、视频、训练缓存和模型权重保留在本地，不直接提交到 Git。
+| 作业要求 | 仓库中的材料 |
+|---|---|
+| 数据集与标注 | `dataset/dataset_object_detection_final_20260831.zip` |
+| 训练代码与配置 | `src/train.py`、`configs/train_finetune_v2.yaml` |
+| 核心检测程序 | `detection.py` |
+| 最终模型 | `models/best.pt` |
+| Jetson ROS2 程序 | `ros2/yolo_detector/` |
+| 最终结果视频 | `videos/final_detection_mouse_bottle_20260831.mp4` |
+| ROS2 终端验证 | `docs/jetson_ros2_validation_20260831.md`、`docs/logs/` |
+| 成功和失败案例 | `results/cases/` |
+| 测试指标 | `docs/final_training_summary.json` |
 
-| 内容 | GitHub | 说明 |
-|---|---|---|
-| 核心代码、配置、依赖和文档 | 是 | 用于助教检查和流程复现 |
-| 基线数据集 | 是 | train 192、val 48、test 20 |
-| 完整扩充数据集 | 否 | 本地图片约 204 MB |
-| `best.pt` 模型权重 | 否 | 使用 Git LFS 或 Release 单独发布 |
-| `runs/`、视频、缓存和原始压缩包 | 否 | 均为生成物或原始素材 |
+模型、最终视频和数据集压缩包通过 Git LFS 保存；`runs/`、缓存、原始采集压缩包及重复中间结果不上传。
 
-基线数据集的类别数量如下：
+## 数据集
 
-| split | mouse | bottle | 总数 |
-|---|---:|---:|---:|
-| train | 96 | 96 | 192 |
-| val | 24 | 24 | 48 |
-| test | 10 | 10 | 20 |
+GitHub 原有未压缩基线数据已经与后续扩充数据合并到一个压缩包中，仓库不再重复存放散列图片和标签。
 
-`test` 来自独立拍摄会话，只用于最终评价，不应根据其结果调整训练参数。
+| split | 图片 | 标签 |
+|---|---:|---:|
+| train | 1082 | 1082 |
+| val | 131 | 131 |
+| test | 37 | 37 |
 
-## 主要文件
-
-```text
-detection.py                         # 图片、视频、摄像头和网络流检测
-view_jetson_stream.py                # 接收并显示 Jetson 发送的 JPEG 视频流
-src/train.py                         # 训练入口
-src/evaluate.py                      # val/test 评价入口
-src/prepare_dataset.py               # 基线数据准备
-src/audit_dataset.py                 # 标签、重复和数据泄漏审计
-configs/train_baseline.yaml          # 基线训练配置
-configs/train_finetune_v2.yaml       # 最终微调配置
-dataset/object_detection/data.yaml   # YOLO 数据集定义
-docs/final_training_summary.json     # 最终训练指标摘要
-```
+解压后保持 `object_detection/` 目录结构，其中包含 `images/`、`labels/`、`splits/` 和 `data.yaml`。压缩包 SHA-256 与文件清单见 `dataset/` 中的 manifest 和 checksum 文件。
 
 ## 环境
 
-最后一次训练使用 Python 3.10.20、Ultralytics 8.4.127、NumPy 2.2.6、Pillow 12.3.0 和 PyYAML 6.0.3。PyTorch/CUDA 应根据运行平台单独安装；Jetson 应使用与 JetPack 匹配的 NVIDIA PyTorch 包，不要直接照搬 Windows CUDA wheel。
+最后一次训练使用 Python 3.10.20 和 Ultralytics 8.4.127。Jetson 上的 PyTorch/CUDA 应安装与 JetPack 匹配的 NVIDIA 版本。
 
 ```bash
 python3.10 -m pip install -r requirements.txt
@@ -49,19 +40,22 @@ python3.10 -m pip install -r requirements.txt
 
 ## 运行检测
 
-先将训练好的权重放到 `models/best.pt`，然后运行：
+摄像头检测：
 
 ```bash
 python3.10 detection.py --weights models/best.pt --source 0 --device 0
 ```
 
-`--source` 可填写摄像头编号、图片、视频或网络流地址；添加 `--save` 可保存带检测框的结果，按 `Q` 退出显示窗口。
-
-接收 Jetson 已编码的视频流时可运行：
+视频检测并保存加框结果：
 
 ```bash
-python3.10 view_jetson_stream.py --host 127.0.0.1 --port 5000
+python3.10 detection.py \
+  --weights models/best.pt \
+  --source input.mp4 \
+  --save --no-display
 ```
+
+`--source` 也可以填写图片或网络流地址；按 `Q` 退出显示窗口。
 
 ## 训练与评价
 
@@ -71,10 +65,29 @@ python3.10 src/evaluate.py --weights models/best.pt --split val
 python3.10 src/evaluate.py --weights models/best.pt --split test
 ```
 
-数据复核命令：
+最终独立测试结果：precision 0.938、recall 0.998、mAP50 0.986、mAP50-95 0.740。模型 SHA-256 为 `c9a4194643a41d742b3feefe486f4b23179468650751f440c9696a95de5c9f0b`。
+
+## Jetson ROS2 运行
 
 ```bash
-python3.10 src/audit_dataset.py
+cd ~/ros2_yolo_ws
+source /opt/ros/humble/setup.bash
+colcon build --packages-select yolo_detector
+source install/setup.bash
+ros2 run yolo_detector yolo_node
 ```
 
-审计包含图片/标签配对、YOLO 坐标合法性、跨集合完全重复、近重复和相邻连续帧泄漏检查。模型权重不直接进入 Git；确需从 GitHub 下载时，应通过 Git LFS 或 GitHub Release 发布并记录 SHA-256。
+节点通过 `/detection_result` 发布类别、置信度和 FPS。第二终端验证：
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_yolo_ws/install/setup.bash
+ros2 topic info /detection_result
+ros2 topic echo /detection_result
+```
+
+板端最终视频测试为 20.625 秒、495 帧、24 FPS；推理消息中观测到 20.24–21.88 FPS。
+
+## 成功和典型错误案例
+
+`results/cases/success_frame_404.jpg` 展示同一帧中正确识别黑色鼠标和黄绿色瓶子；`failure_frame_135.jpg` 展示同一次最终视频验证中白色鼠标漏检。典型错误案例来自最终 `best.pt` 的真实验证过程，不使用一段完全识别错误的视频代替。

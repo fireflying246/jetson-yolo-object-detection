@@ -1,0 +1,23 @@
+=== NODE LIST ===
+/yolo_detector
+=== TOPIC LIST ===
+/detection_result
+/parameter_events
+/rosout
+=== TOPIC TYPE ===
+std_msgs/msg/String
+=== TOPIC INFO ===
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 0
+=== FIVE LIVE MESSAGES ===
+data: bottle:0.58 | FPS:20.24
+---
+data: mouse:0.79 | FPS:21.01
+---
+data: mouse:0.77 | FPS:21.35
+---
+data: bottle:0.66 | FPS:21.65
+---
+data: bottle:0.90, mouse:0.66 | FPS:21.88
+---

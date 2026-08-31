@@ -1,0 +1,18 @@
+[INFO] [1788006385.660389544] [yolo_detector]: YOLO ROS2 detector started
+[INFO] [1788006385.661082824] [yolo_detector]: Model: /home/nvidia/object_detection/models/best.pt
+[INFO] [1788006385.661646696] [yolo_detector]: Model classes: {0: 'mouse', 1: 'bottle'}
+[INFO] [1788006385.662146248] [yolo_detector]: Source: /home/nvidia/jetson_yolo/final_input_20260831.mp4
+[INFO] [1788006385.662649768] [yolo_detector]: Publishing topic: /detection_result
+[INFO] [1788006385.663144232] [yolo_detector]: Recording video: /home/nvidia/jetson_yolo/final_detection_mouse_bottle_20260831.mp4
+[WARN] [1788006407.416834152] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.417893832] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.418855272] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.419697384] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.420820168] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.421836456] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.422723496] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.423757288] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.424817800] [yolo_detector]: Failed to read source frame
+[WARN] [1788006407.425829416] [yolo_detector]: Failed to read source frame
+[INFO] [1788006407.426431976] [yolo_detector]: Stopping detector: video source ended or became unavailable
+[INFO] [1788006407.429277800] [yolo_detector]: Video closed: /home/nvidia/jetson_yolo/final_detection_mouse_bottle_20260831.mp4; frames=495

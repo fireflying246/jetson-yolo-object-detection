@@ -1,0 +1,3 @@
+dataset/dataset_object_detection_final_20260831.zip filter=lfs diff=lfs merge=lfs -text
+models/best.pt filter=lfs diff=lfs merge=lfs -text
+videos/final_detection_mouse_bottle_20260831.mp4 filter=lfs diff=lfs merge=lfs -text

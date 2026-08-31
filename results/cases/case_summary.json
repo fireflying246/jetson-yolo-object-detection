@@ -1,0 +1,19 @@
+{
+  "source_video": "videos/final_detection_mouse_bottle_20260831.mp4",
+  "model": "models/best.pt",
+  "success": {
+    "file": "success_frame_404.jpg",
+    "frame": 404,
+    "time_seconds": 16.83,
+    "sha256": "1ab2cc416231138f67a22c7fbb9878b75106f88833dd22e19db9017cf320fbd9",
+    "description": "黑色鼠标和黄绿色瓶子均被正确加框。"
+  },
+  "failure": {
+    "file": "failure_frame_135.jpg",
+    "frame": 135,
+    "time_seconds": 5.62,
+    "sha256": "4c45bf3b21afb60a27eae8e63822971fcc689d55e3ee71f8197fde9d3b447956",
+    "type": "missed_detection",
+    "description": "白色鼠标清晰可见但没有检测框，属于漏检。"
+  }
+}
