@@ -10,10 +10,12 @@
 | 训练代码与配置 | `src/train.py`、`configs/train_finetune_v2.yaml` |
 | 核心检测程序 | `detection.py` |
 | 最终模型 | `models/best.pt` |
+| 微调起始模型 | `models/best_v1.pt` |
 | Jetson ROS2 程序 | `ros2/yolo_detector/` |
 | 最终结果视频 | `videos/final_detection_mouse_bottle_20260831.mp4` |
 | ROS2 终端验证 | `docs/jetson_ros2_validation_20260831.md`、`docs/logs/` |
 | 成功和失败案例 | `results/cases/` |
+| 20 张独立图片测试明细 | `results/web_test_20260831/` |
 | 测试指标 | `docs/final_training_summary.json` |
 
 模型、最终视频和数据集压缩包通过 Git LFS 保存；`runs/`、缓存、原始采集压缩包及重复中间结果不上传。
@@ -64,6 +66,8 @@ python3.10 src/train.py --config configs/train_finetune_v2.yaml
 python3.10 src/evaluate.py --weights models/best.pt --split val
 python3.10 src/evaluate.py --weights models/best.pt --split test
 ```
+
+`train_finetune_v2.yaml` 从 `models/best_v1.pt` 继续微调；该起始模型与最终模型均随仓库提供。
 
 最终独立测试结果：precision 0.938、recall 0.998、mAP50 0.986、mAP50-95 0.740。模型 SHA-256 为 `c9a4194643a41d742b3feefe486f4b23179468650751f440c9696a95de5c9f0b`。
 

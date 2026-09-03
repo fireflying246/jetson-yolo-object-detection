@@ -16,6 +16,7 @@ videos/*
 models/*.pt
 models/*.onnx
 !models/best.pt
+!models/best_v1.pt
 results/**/weights/*.pt
 results/**/weights/*.onnx
 runs/

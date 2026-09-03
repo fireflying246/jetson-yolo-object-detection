@@ -1,0 +1,29 @@
+{
+  "model": "D:\\object detection\\models\\best.pt",
+  "model_sha256": "c9a4194643a41d742b3feefe486f4b23179468650751f440c9696a95de5c9f0b",
+  "model_classes": {
+    "0": "mouse",
+    "1": "bottle"
+  },
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "images": 15,
+  "inference_floor": 0.001,
+  "reported_confidence_threshold": 0.25,
+  "reported_iou_threshold": 0.5,
+  "mean_expected_confidence": 0.367098,
+  "correct_at_conf_0_25_iou_0_50": 7,
+  "hit_rate": 0.466667,
+  "mean_inference_ms_per_image": 2.8,
+  "mouse": {
+    "images": 10,
+    "mean_expected_confidence": 0.395016,
+    "correct_at_conf_0_25_iou_0_50": 6,
+    "hit_rate": 0.6
+  },
+  "cup_labeled_as_bottle": {
+    "images": 5,
+    "mean_expected_confidence": 0.311261,
+    "correct_at_conf_0_25_iou_0_50": 1,
+    "hit_rate": 0.2
+  }
+}
