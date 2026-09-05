@@ -19,6 +19,6 @@
 - 验证集：Precision 0.981、Recall 0.972、mAP50 0.989、mAP50-95 0.767。
 - 独立测试集：Precision 0.938、Recall 0.998、mAP50 0.986、mAP50-95 0.740。
 - 权重 SHA-256：`c9a4194643a41d742b3feefe486f4b23179468650751f440c9696a95de5c9f0b`。
-- 模型权重和完整扩充数据集仅保存在本地，未直接提交 GitHub。
+- 最终模型 `models/best.pt`、微调起始模型 `models/best_v1.pt` 和完整数据集压缩包 `dataset/dataset_object_detection_final_20260831.zip` 已通过 Git LFS 提交 GitHub。
 
 后续每次训练至少记录：Git提交号、环境锁文件、模型、预训练权重、参数、随机种子、运行命令、硬件、耗时、最佳epoch、Precision、Recall、mAP50、mAP50-95及错误案例。

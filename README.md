@@ -15,7 +15,7 @@
 | 最终结果视频 | `videos/final_detection_mouse_bottle_20260831.mp4` |
 | ROS2 终端验证 | `docs/jetson_ros2_validation_20260831.md`、`docs/logs/` |
 | 成功和失败案例 | `results/cases/` |
-| 20 张独立图片测试明细 | `results/web_test_20260831/` |
+| 补充网络图片测试 | `results/web_test_20260831/`（15 张图片，CSV 保存典型样本明细） |
 | 测试指标 | `docs/final_training_summary.json` |
 
 模型、最终视频和数据集压缩包通过 Git LFS 保存；`runs/`、缓存、原始采集压缩包及重复中间结果不上传。
@@ -30,7 +30,7 @@ GitHub 原有未压缩基线数据已经与后续扩充数据合并到一个压�
 | val | 131 | 131 |
 | test | 37 | 37 |
 
-解压后保持 `object_detection/` 目录结构，其中包含 `images/`、`labels/`、`splits/` 和 `data.yaml`。压缩包 SHA-256 与文件清单见 `dataset/` 中的 manifest 和 checksum 文件。
+解压后保持 `object_detection/` 目录结构，其中包含 `images/`、`labels/`、`splits/` 和 `data.yaml`。压缩包 SHA-256 与文件清单见 `dataset/` 中的 manifest 和 checksum 文件，最终数据集审计结果见 `docs/dataset_audit.json`。
 
 ## 环境
 

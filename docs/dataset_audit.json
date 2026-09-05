@@ -1,35 +1,53 @@
 {
-  "generated_at_utc": "2026-08-25T09:00:22.789445+00:00",
-  "dataset_root": "dataset/object_detection",
+  "generated_at": "2026-09-01T10:10:10+08:00",
+  "dataset": "dataset/object_detection",
   "status": "pass",
-  "thresholds": {
-    "phash_cross_split_hamming_max": 4,
-    "adjacent_cross_split_hamming_max": 8
-  },
-  "counts": {
+  "splits": {
     "train": {
-      "images": 192,
-      "labels": 192,
-      "annotations": 192
+      "images": 1082,
+      "labels": 1082,
+      "missing_labels": [],
+      "orphan_labels": [],
+      "boxes": {
+        "mouse": 762,
+        "bottle": 401,
+        "total": 1163
+      }
     },
     "val": {
-      "images": 48,
-      "labels": 48,
-      "annotations": 48
+      "images": 131,
+      "labels": 131,
+      "missing_labels": [],
+      "orphan_labels": [],
+      "boxes": {
+        "mouse": 90,
+        "bottle": 68,
+        "total": 158
+      }
     },
     "test": {
-      "images": 20,
-      "labels": 20,
-      "annotations": 20
+      "images": 37,
+      "labels": 37,
+      "missing_labels": [],
+      "orphan_labels": [],
+      "boxes": {
+        "mouse": 25,
+        "bottle": 12,
+        "total": 37
+      }
     }
   },
-  "pairing": {
-    "missing_labels": [],
-    "orphan_labels": [],
-    "duplicate_stems": []
-  },
-  "label_errors": [],
+  "invalid_labels": [],
   "cross_split_exact_duplicates": [],
-  "cross_split_near_duplicates": [],
-  "cross_split_adjacent_near_duplicates": []
+  "summary": {
+    "total_images": 1250,
+    "total_labels": 1250,
+    "total_boxes": 1358,
+    "mouse_boxes": 877,
+    "bottle_boxes": 481,
+    "missing_label_count": 0,
+    "orphan_label_count": 0,
+    "invalid_label_count": 0,
+    "cross_split_exact_duplicate_groups": 0
+  }
 }
